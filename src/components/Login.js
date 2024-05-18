@@ -1,10 +1,10 @@
-import React from "react";
-import "../assets/css/Login.css";
-import Signup from "./Signup";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-export default function Login({ onSignupClick }) {
+import "../assets/css/Login.css";
+import Signup from "./Signup";
+
+export default function Login() {
   const [showLogin, setShowLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,23 +14,19 @@ export default function Login({ onSignupClick }) {
     setShowLogin(false);
   };
 
-  const handleOpen = (id) => {
-    window.location.href = '/home';
-  };
-
   const handleLoginClick = () => {
     setShowLogin(true);
   };
-  async function login(event) {
-    const ev = event;
+
+  async function login(ev) {
     ev.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/buildings/login",
+        "http://localhost:3001/api/login",
         { username, password },
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true, // Make sure to include this option
+          withCredentials: true,
         }
       );
       if (response.status === 200) {
@@ -44,9 +40,11 @@ export default function Login({ onSignupClick }) {
       alert("Login failed");
     }
   }
+
   if (redirect) {
-    return <Navigate to={"/home"} />;
+    return <Navigate to="/home" />;
   }
+
   return (
     <div className="main">
       {showLogin ? (
@@ -55,21 +53,22 @@ export default function Login({ onSignupClick }) {
           <input
             className="input"
             type="text"
-            placeholder="username"
+            placeholder="Username"
             value={username}
             onChange={(ev) => setUsername(ev.target.value)}
           />
           <input
             className="input"
             type="password"
-            placeholder="password"
+            placeholder="Password"
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
-          <button className="button" handleOpen>Login</button>
-
+          <button className="button" type="submit">
+            Login
+          </button>
           <p>
-            No account?
+            No account?{" "}
             <span>
               <a className="register-redirect" onClick={handleSignupClick}>
                 Register
@@ -80,7 +79,6 @@ export default function Login({ onSignupClick }) {
       ) : (
         <Signup onLoginClick={handleLoginClick} />
       )}
-{/*  */}
     </div>
   );
 }
