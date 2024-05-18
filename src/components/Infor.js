@@ -1,72 +1,93 @@
-import "../assets/css/Infor.css";
+import React, { useLayoutEffect, useState } from "react";
 import axios from "axios";
-import React, {useLayoutEffect, useEffect, useState } from "react";
 import Header from "./Header";
 import Loading from "./Loading";
-
+import { FaLightbulb, FaRegLightbulb, FaTemperatureHigh, FaTint, FaCloud } from 'react-icons/fa'; // Import các biểu tượng từ react-icons
+import arduinor3IMG from "../assets/img/arduinor3.png";
+import "../assets/css/Infor.css";
 
 function Infor() {
   const queryString = window.location.search;
-  const regex = /(?<=\?).+/;
-  const match = queryString.match(regex);
-  const id = match ? match[0] : "";
-  const [loading, setLoading] = useState(false)
+  const urlParams = new URLSearchParams(queryString);
+
+  const id = urlParams.get('id') || "";
+  const deviceName = urlParams.get('name') || "Unknown Device";
+  const deviceStatus = urlParams.get('status') === 'true';
+  const deviceUpdatedAt = urlParams.get('updatedAt') || "Unknown Time";
+
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
 
   const handOnLight = () => {
-    console.log('on')
-    axios
-      .put("https://control-devices.onrender.com/api/updateSensor/" + id, {
-        humidity: data.humidity,
-        temperature: data.temperature,
-        light: data.light,
-        status_light: 1,
-      })
-      .catch((error) => {
-        console.error("Error fetching building data:", error);
-      });
-  }
+    if (data) {
+      console.log('on');
+      axios
+        .put("https://control-devices.onrender.com/api/updateSensor/" + id, {
+          humidity: data.humidity,
+          temperature: data.temperature,
+          light: data.light,
+          status_light: 1,
+        })
+        .catch((error) => {
+          console.error("Error updating sensor data:", error);
+        });
+    }
+  };
+
   const handOffLight = () => {
-    console.log("off")
-    axios
-      .put("https://control-devices.onrender.com/api/updateSensor/" + id, {
-        humidity: data.humidity,
-        temperature: data.temperature,
-        light: data.light,
-        status_light: 0,
-      })
-      .catch((error) => {
-        console.error("Error fetching building data:", error);
-      });
-  }
+    if (data) {
+      console.log("off");
+      axios
+        .put("https://control-devices.onrender.com/api/updateSensor/" + id, {
+          humidity: data.humidity,
+          temperature: data.temperature,
+          light: data.light,
+          status_light: 0,
+        })
+        .catch((error) => {
+          console.error("Error updating sensor data:", error);
+        });
+    }
+  };
+
   useLayoutEffect(() => {
     const interval = setInterval(() => {
-      // setLoading(true);
       axios
         .get("http://localhost:3001/api/getDeviceById/" + id)
         .then((response) => {
           setData(response.data);
-          console.log(response.data)
-          // setLoading(false);
+          console.log(response.data);
         })
         .catch((error) => {
-          // setLoading(false)
-          console.error("Error fetching building data:", error);
+          console.error("Error fetching device data:", error);
         });
-    console.log('hi')
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
-  
+  }, [id]);
+
   return (
     <>
       <Header />
       <div className="Infor">
+        <div className="dvimg">
+          <img
+            className="device_img-child"
+            src={arduinor3IMG}
+            alt="Device"
+          />
+        </div>
+        <h2>Device Name: {deviceName}</h2>
+        <p className={`status-text ${deviceStatus ? "online" : "offline"}`}>
+          Status: {deviceStatus ? "Online" : "Offline"}
+        </p>
+        <p>Last Updated: {deviceUpdatedAt}</p>
         <div className="controller">
           {data ? (
             <>
               <div className="controller-tools">
-                <div className="title">Temperature Room</div>
+                <div className="title">
+                  Temperature Room <FaTemperatureHigh className="icon" />
+                </div>
                 <div className="infor_of--tool">
                   <div className="infor-number">
                     {data.temperature}
@@ -75,7 +96,9 @@ function Infor() {
                 </div>
               </div>
               <div className="controller-tools">
-                <div className="title">Humidity Room</div>
+                <div className="title">
+                  Humidity Room <FaTint className="icon" />
+                </div>
                 <div className="infor_of--tool">
                   <div className="infor-number">
                     {data.humidity}
@@ -84,7 +107,9 @@ function Infor() {
                 </div>
               </div>
               <div className="controller-tools">
-                <div className="title">Light Room</div>
+                <div className="title">
+                  Light Room <FaCloud className="icon" />
+                </div>
                 <div className="infor_of--tool">
                   <div className="infor-number">
                     {data.light}
@@ -96,29 +121,32 @@ function Infor() {
           ) : (
             <>
               <div className="controller-tools">
-                <div className="title">Temperature Room</div>
+                <div className="title">
+                  Temperature Room <FaTemperatureHigh className="icon" />
+                </div>
                 <div className="infor_of--tool">
                   <div className="infor-number">
-                  <div className="infor-unit">°</div>
-
+                    <div className="infor-unit">°</div>
                   </div>
                 </div>
               </div>
               <div className="controller-tools">
-                <div className="title">Humidity Room</div>
+                <div className="title">
+                  Humidity Room <FaTint className="icon" />
+                </div>
                 <div className="infor_of--tool">
                   <div className="infor-number">
-                  <div className="infor-unit">%</div>
-
+                    <div className="infor-unit">%</div>
                   </div>
                 </div>
               </div>
               <div className="controller-tools">
-                <div className="title">Light Room</div>
+                <div className="title">
+                  Light Room <FaCloud className="icon" />
+                </div>
                 <div className="infor_of--tool">
                   <div className="infor-number">
-                  <div className="infor-unit">lux</div>
-
+                    <div className="infor-unit">lux</div>
                   </div>
                 </div>
               </div>
@@ -126,15 +154,15 @@ function Infor() {
           )}
         </div>
         <div className="lights">
-          <button onClick={() =>handOnLight()} className="light light1">
-            <i className="fas fa-sun icon-light"></i>
+          <button style={{fontSize:"20px", fontWeight:"bold"}} onClick={handOnLight} className="light light1">
+            ON<FaLightbulb className="icon-light" />
           </button>
-          <button onClick={() =>handOffLight()} className="light light2">
-            <i className="fas fa-moon icon-light"></i>
+          <button style={{fontSize:"20px", fontWeight:"bold"}} onClick={handOffLight} className="light light2">
+            OFF<FaRegLightbulb className="icon-light" />
           </button>
         </div>
       </div>
-      {loading && <Loading/>}
+      {loading && <Loading />}
     </>
   );
 }

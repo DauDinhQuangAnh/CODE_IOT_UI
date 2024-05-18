@@ -9,29 +9,40 @@
 
 .controller{
     width: 80vw;
-    height: 70vh;
+    height: 20vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     gap: 1.5rem;
+    
 }
+.dvimg{
+    width: 30%;
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5rem;
+    border: 1px solid rgb(182, 182, 182);
 
+}
 .controller-tools{
-    width: 40%;
-    height: 70%;
+    width: 30%;
+    height: 80%;
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 0.2rem;
     gap: 1rem;
+
 }
 
 .infor_of--tool{
     width: 100%;
     height: 90%;
     border-radius: 5rem;
-    background-color: rgb(85, 150, 150);
+    background: linear-gradient(135deg, #fce7ff, #d41872);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +53,7 @@
 .title{
     display: inline;
     font-weight: bold;
+    font-size: 30px;
 }
 
 .lights{
@@ -106,3 +118,28 @@
 }
 
 
+.status-text {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .online {
+    color: green;
+  }
+  
+  .offline {
+    color: red;
+  }
+  .icon {
+    font-size: 20px;
+    margin-left: 10px;
+    color: #00d9ff; 
+    font-size: 50px;
+  }
+  
+  .icon-light {
+    font-size: 24px;
+    margin: 0 5px;
+  }
+  
+  
