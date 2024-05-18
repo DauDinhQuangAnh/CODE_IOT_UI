@@ -1,26 +1,57 @@
-.nav{
+.nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
-    height: 3rem;
-    background-color: rgb(0, 0, 0);
-    gap: 1rem;
+    padding: 0 20px;
+    background-color: #333;
+    color: #fff;
+    height: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.nav_child{
-    width: 7%;
-    height: 100%;
+.nav-left, .nav-right {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
-.nav_child:hover{
+.nav-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
     cursor: pointer;
 }
 
-.nav_child--icon{
-    font-size: 2.2rem;
-    color: rgb(196, 196, 196);
+.nav-item:last-child {
+    margin-right: 0;
+}
+
+.nav-icon {
+    margin-right: 8px;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.nav-text {
+    font-size: 1em;
+    color: #fff;
+}
+
+.nav-item:hover {
+    color: #ddd;
+}
+
+.nav-item:hover .nav-icon {
+    color: #ddd;
+}
+
+.nav-item:hover .nav-text {
+    color: #ddd;
+}
+
+.nav-left .nav-item {
+    transition: color 0.3s;
+}
+
+.nav-right .nav-item {
+    transition: color 0.3s;
 }

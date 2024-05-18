@@ -30,6 +30,7 @@ export default function Login() {
         }
       );
       if (response.status === 200) {
+        localStorage.setItem("username", username); // Lưu tên người dùng vào localStorage
         setRedirect(true);
         alert("Login successful");
       } else {

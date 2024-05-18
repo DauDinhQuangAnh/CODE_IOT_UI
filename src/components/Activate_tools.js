@@ -2,7 +2,6 @@ import "../assets/css/App.css";
 import backgroundIMG from "../assets/img/bgrhead.png";
 import arduinor3IMG from "../assets/img/arduinor3.png";
 import { useLayoutEffect, useState } from "react";
-import Header from "./Header";
 import axios from "axios";
 
 const handleOpen = (device) => {
@@ -30,7 +29,7 @@ function Activate_tools() {
 
   return (
     <>
-      <Header />
+      
       <div className="main">
         <div className="back-head">
           <img className="img-back" src={backgroundIMG} alt="Background" />
@@ -44,8 +43,7 @@ function Activate_tools() {
         </div>
         <br />
         <div className="device">All Devices</div>
-        <br />
-        <br />
+    
         <div className="main_device">
           {dataTools.map((item, index) => (
             <div className="device" key={index}>

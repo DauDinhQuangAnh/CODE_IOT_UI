@@ -47,16 +47,16 @@
   left: 0;
   display: flex;
   flex-direction: row;
+  padding-bottom: 30px;
 }
 
 .main_device{
-  display: flex;
-  width: 700px;
+  width: 400px;
   height: auto;
   background-color: rgb(237, 237, 237);
   border-radius: 1rem;
   padding: 1rem;
-justify-content: space-between;}
+}
 
 .info{
   display: flex;
