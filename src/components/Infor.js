@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
 import axios from "axios";
-import Header from "./Header";
 import Loading from "./Loading";
 import { FaLightbulb, FaRegLightbulb, FaTemperatureHigh, FaTint, FaCloud } from 'react-icons/fa'; // Import các biểu tượng từ react-icons
 import arduinor3IMG from "../assets/img/arduinor3.png";
@@ -10,7 +9,7 @@ function Infor() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
 
-  const id = urlParams.get('id') || "";
+  const id = urlParams.get('_id') || "";
   const deviceName = urlParams.get('name') || "Unknown Device";
   const deviceStatus = urlParams.get('status') === 'true';
   const deviceUpdatedAt = urlParams.get('updatedAt') || "Unknown Time";
@@ -18,7 +17,7 @@ function Infor() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
 
-  const handOnLight = () => {
+    const handOnLight = () => {
     if (data) {
       console.log('on');
       axios
@@ -67,7 +66,7 @@ function Infor() {
 
   return (
     <>
-      <Header />
+    
       <div className="Infor">
         <div className="dvimg">
           <img
