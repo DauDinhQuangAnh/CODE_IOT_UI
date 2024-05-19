@@ -1,11 +1,14 @@
-.Infor{
-    width: 100vw;
-    height: 90vh;
+.Infor {
+    background-image: url('../img/bgr1.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 20px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
-}
+    justify-content: center;
+  }
 
 .controller{
     width: 80vw;

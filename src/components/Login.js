@@ -48,9 +48,10 @@ export default function Login() {
 
   return (
     <div className="main">
+      
       {showLogin ? (
         <form className="login" onSubmit={login}>
-          <h1 className="login-title">Login</h1>
+          <h1 className="login-title">Login In To The System</h1>
           <input
             className="input"
             type="text"
@@ -65,13 +66,13 @@ export default function Login() {
             value={password}
             onChange={(ev) => setPassword(ev.target.value)}
           />
-          <button className="button" type="submit">
+          <button style={{fontSize:"20px"}} className="button" type="submit">
             Login
           </button>
-          <p>
+          <p style={{fontWeight:"bold", color:"white", fontSize:"30px"}}>
             No account?{" "}
             <span>
-              <a className="register-redirect" onClick={handleSignupClick}>
+              <a style={{fontWeight:"bold", color:"white", fontSize:"30px", textDecoration:"underline"}} className="register-redirect" onClick={handleSignupClick}>
                 Register
               </a>
             </span>

@@ -85,7 +85,7 @@ function AddDevice() {
 
   return (
     <div className="add-device-container">
-      <h1>Add Device</h1>
+      <h1>Add New Device</h1>
       <form className="add-device-form" onSubmit={handleAddDevice}>
         <input
           type="text"
@@ -113,8 +113,8 @@ function AddDevice() {
             <p><strong>Name:</strong> {device.name}</p>
             <p><strong>Message:</strong> {device.message}</p>
             <p><strong>Status:</strong> {device.isActive ? "Active" : "Inactive"}</p>
-            <button onClick={() => handleDeleteDevice(device._id)}>Delete Device</button>
-            <button onClick={() => handleAddSensor(device._id)}>Add Sensor</button>
+            <button className="delete-button" onClick={() => handleDeleteDevice(device._id)}>Delete Device</button>
+            <button className="add-sensor-button" onClick={() => handleAddSensor(device._id)}>Add Sensor</button>
             <h3>Sensors</h3>
             <ul className="sensor-list">
               {sensors.filter(sensor => sensor.id_device === device._id).map(sensor => (

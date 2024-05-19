@@ -1,5 +1,4 @@
 import "../assets/css/App.css";
-import backgroundIMG from "../assets/img/bgrhead.png";
 import arduinor3IMG from "../assets/img/arduinor3.png";
 import { useLayoutEffect, useState } from "react";
 import axios from "axios";
@@ -31,11 +30,9 @@ function Activate_tools() {
     <>
       
       <div className="main">
-        <div className="back-head">
-          <img className="img-back" src={backgroundIMG} alt="Background" />
-        </div>
+        
         <div className="welcome-header">Course: Công nghệ Internet of things hiện đại - NT532.O21.CTTT</div>
-        <div className="welcome-name">Welcome to IOT Team ? Project</div>
+        {/* <div className="welcome-name">Welcome to IOT Team ? Project</div> */}
         <div className="member-name">
           <div className="member">Member 1: Dau Dinh Quang Anh</div>
           <div className="member">Member 2: Nguyen Thuc Hoang Hung</div>
