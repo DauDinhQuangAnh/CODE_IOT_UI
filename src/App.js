@@ -18,7 +18,7 @@ function AppContent() {
       {location.pathname !== "/" && location.pathname !== "/signup" && username && <Header username={username} />}
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Activate_tools />} />
+        <Route path="/homes" element={<Activate_tools />} />
         <Route path="/infor" element={<Infor />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/device" element={<AddDevice />} />
